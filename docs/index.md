@@ -9,7 +9,7 @@ This basically checks the root class of the response type and if it is a Gson mo
 
 # Installation
 
-Add to _build.gradle_:
+1. Add to _build.gradle_:
 ```groovy
 allprojects {
 	repositories {
@@ -18,7 +18,18 @@ allprojects {
 	}
 }
 ```
-Add the dependency
+2. Add the dependency
 ```groovy
 implementation 'com.github.muthuraj57:moshi-gson-interop-retrofit-converter:1.0.0'
 ```
+
+3. Add the converter
+```
+Retrofit.Builder()
+    ...
+    .addCallAdapterFactory(SynchronousCallAdapterFactory.create())
+    ...
+    .create(ApiService::class.java)
+```
+
+Note: If you already have added `GsonConverterFactory` and/or `MoshiConverterFactory` in the `Retrofit` builder, you should remove those.
