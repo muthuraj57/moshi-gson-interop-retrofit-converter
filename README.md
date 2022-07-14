@@ -23,13 +23,50 @@ allprojects {
 implementation 'com.github.muthuraj57:moshi-gson-interop-retrofit-converter:1.0.0'
 ```
 
-3. Add the converter
+---
+
+# Usage
+### Add the converter
 ```
 Retrofit.Builder()
     ...
-    .addCallAdapterFactory(SynchronousCallAdapterFactory.create())
+    .addConverterFactory(MoshiGsonInteropConverterFactory(moshi, gson))
     ...
     .create(ApiService::class.java)
 ```
 
 Note: If you already have added `GsonConverterFactory` and/or `MoshiConverterFactory` in the `Retrofit` builder, you should remove those.
+
+---
+
+# Example
+
+```
+data class GsonModel(val name: GsonName, val age: Int)
+
+data class GsonName(val firstName: String, val lastName: String)
+
+@JsonClass(generateAdapter = true)
+data class MoshiModel(val name: MoshiName, val age: Int)
+
+@JsonClass(generateAdapter = true)
+data class MoshiName(val firstName: String, val lastName: String)
+
+ private interface ApiService {
+        @GET("/moshiModel")
+        fun getMoshiModel(): MoshiModel
+
+        @GET("/gsonModel")
+        fun getGsonModel(): GsonModel
+    }
+```
+
+Here we have two APIs and the first one should be parsed with `Moshi` and the second one should be parsed with `Gson`. If `GsonConverterFactory` and/or `MoshiConverterFactory` are used independently without using `MoshiGsonInteropConverterFactory`, then all the models will be tried to parse from either `Gson` or `Moshi`(depending on the order you added the converters).
+
+If you instead addd `MoshiGsonInteropConverterFactory` like [this to the retrofit builder](#add-the-converter), both models can be parsed with the single `Retrofit` instance.
+
+```
+apiService.getGsonModel() //This works fine.
+
+apiService.getMoshiModel() //This also works fine.
+```
