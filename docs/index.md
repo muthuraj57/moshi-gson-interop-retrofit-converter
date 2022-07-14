@@ -1,37 +1,24 @@
-## Welcome to GitHub Pages
+# moshi-gson-interop-retrofit-converter
 
-You can use the [editor on GitHub](https://github.com/muthuraj57/moshi-gson-interop-retrofit-converter/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+A [Retrofit](https://square.github.io/retrofit/) converter that converts both [Gson](https://github.com/google/gson) and [Moshi](https://github.com/square/moshi) models.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This tool can be used in the projec where both `Gson` and `Moshi` are present. 
 
-### Markdown
+Note that, this won't work if a particular model class is mixed with both Gson and Moshi.
+This basically checks the root class of the response type and if it is a Gson model, all of its fields will also be parsed as Gson. And if it is a Moshi model, all of its fields will be parsed as Moshi 
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+# Installation
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+Add to _build.gradle_:
+```groovy
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
 ```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/muthuraj57/moshi-gson-interop-retrofit-converter/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Add the dependency
+```groovy
+implementation 'com.github.muthuraj57:moshi-gson-interop-retrofit-converter:1.0.0'
+```
