@@ -1,0 +1,16 @@
+[versions]
+moshi = "1.13.0"
+gson = "2.9.0"
+retrofit = "2.9.0"
+
+[libraries]
+moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+
+retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+
+[bundles]
+retrofit = ["retrofit-core", "retrofit-converter-gson", "retrofit-converter-moshi"]
