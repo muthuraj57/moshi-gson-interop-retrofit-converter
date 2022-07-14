@@ -1,4 +1,4 @@
-# moshi-gson-interop-retrofit-converter
+# Moshi Gson interop Retrofit converter
 
 A [Retrofit](https://square.github.io/retrofit/) converter that converts both [Gson](https://github.com/google/gson) and [Moshi](https://github.com/square/moshi) models.
 
